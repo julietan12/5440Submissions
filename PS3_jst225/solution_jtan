@@ -1,0 +1,46 @@
+include("Flux.jl")
+using CSV
+
+### Part a
+df_stoic = CSV.read("stoic.csv")
+stoic_array = Matrix(df_stoic)
+stoic_array = stoic_array[:,2:20]
+stoic_array = convert(Array{Float64,2},stoic_array)
+println("---------------------")
+println("part a: uncomment row 11 to see stoichiometric array S")
+#println(stoic_array)
+
+###Part b
+df_atom = CSV.read("atom_array.csv")
+atom_array = Matrix(df_atom)
+atom_array = atom_array[:,2:7]
+atom_array = convert(Array{Float64,2}, atom_array)
+
+ATS = transpose(atom_array)*stoic_array
+elemental_balance = 2
+if ATS[:,1:5] == zeros(Int8, 6, 5)
+    elemental_balance = 1
+    println("part b: C, H, N, O, P are balanced")
+else
+    elemental_balance = 0
+    println("part b: C, H, N, O, P are not balanced")
+end
+
+#Part C
+df_flux = CSV.read("flux_bounds.csv")
+flux_bounds = Matrix(df_flux)
+flux_bounds = flux_bounds[:,2:3]
+flux_bounds = convert(Array{Float64,2}, flux_bounds)
+
+df_species = CSV.read("species_bounds.csv")
+species_bounds = Matrix(df_species)
+species_bounds = species_bounds[:,2:3]
+species_bounds = convert(Array{Float64,2}, species_bounds)
+
+c = Array{Float64, 1}(undef, 19)
+c = [0.0; 0.0; 0.0; 0.0; 0.0; 0.0; 0.0; 0.0; 1.0; 0.0; 0.0; 0.0; 0.0; 0.0; 0.0; 0.0; 0.0; 0.0;0.0]
+
+(objective_value, calculated_flux_array, dual_value_array, uptake_array, exit_flag, status_flag) = calculate_optimal_flux_distribution(stoic_array,flux_bounds,species_bounds,c; min_flag=false)
+print("part c: the maximum rate of urea production is ")
+print(objective_value)
+println(" mmol/gDW-hr")
