@@ -1,0 +1,42 @@
+1: 
+a) 
+see Excel sheet “a”
+
+b)
+see written response
+
+c)
+see Excel sheet “c”
+
+d)
+see Excel sheet “d”
+The shapes are quite similar, but the scale is quite different, which affects the fit. The scale can be adjusted by increasing ke,x* (the transcription elongation rate constant). After that, the fit can be adjusted by changing tau, the time constant relating the rate constants for forming and consuming the open transcription complex. Finally, the parameters used to define u can play a big role in affecting the fit, since the inducer’s response is provided through u. 
+
+2: 
+a) 
+see written response
+
+b) 
+see written response 
+
+c) 
+see paper and run file “2c.jl”. The plot is saved as file “2c.png”. 
+	It appears that the black solid lines of Figure 1B are qualitatively reproducible. 
+
+d) 
+Run file “2d.jl”
+I was unsure about the parameters n_zx, n_xz, and n_yz since they are not specified in Figure S.1, so I assumed they were equal to the given exponent n_xy = 2.7
+
+I couldn’t produce a plot for S=10 with either of the parameter sets specified in Figure S.1. However, in the S=0.02 and S=10^5 plots, we see similar trends with Fig 2b in the paper. For low S, X is small across the plotted time points (file: “2d_1.png”). For high S, X is much higher across the plotted time points (file: “2d_2.png”). 
+
+e)
+For the stable steady state below the Hopf bifurcation point, I chose S=0.1. X_SS = 0.0045, Y_SS = 0.575, Z_SS = 0.065
+
+However, I think there’s something wrong with my model and it can’t find a solution for S=100. For the perturbations to the steady state below the Hopf bifurcation point, I was expecting to see incoherence. Based on the paper, I was expecting to see that the Z curves for the 3 cells would be in misalignment after S increases to 100. 
+
+For the perturbations to the steady state near but above the saddle node bifurcation, I was expecting to see coherent oscillations (ie. the Z curves would align with each other after the sudden decrease in S). 
+
+Unfortunately, at S=0.1 (well within what should be stable steady state region below the Hopf bifurcation), Z already exhibits increasing oscillations (NOT the damped oscillations it should show at a stable steady state). 
+
+f)
+I’m not sure; my model can’t find solutions at S=105 or at S=100. The phrasing of the question makes me think that coherent oscillations aren’t possible by decreasing the signal from S=105 to S=100, but I think it would be really cool to replicate the authors’ results using the parameters they shared. 
